@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">
+    <title>semana01</title>
+    <style>
+        #container {
+            position: relative;
+            margin: 0 auto;
+            width: 50%;
+            
+        }
+        
+        #mensagemInput {
+            position: relative;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-bottom: 5%;
+        }
+        
+        #mensagem{
+            resize: none;
+        }
+        
+        #mural {
+            position: relative;
+            /* width: 100%; */
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="mensagemInput">
+            <h1>Deixe um recado!</h1>
+            <h3>Título</h3>
+            <input type="text" name="titulo" id="tituloMsg">
+            <h3>Mensagem</h3>
+            <textarea name="corpoMensagem" id="mensagem" cols="50" rows="10"></textarea>
+            <button class="btn btn-success" id="registro" onclick="registrarRecado()">Registrar</button>
+        </div>
+        <div id="mural">
+        </div>
+        
+    </div>
+    
+    <script src="./bundle.js"></script>
+</body>
+</html>
