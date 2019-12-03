@@ -1,46 +1,62 @@
-var btnRegistro = document.getElementById('registro');
-var mural = document.getElementById('mural');
+class App {
+    constructor(){
+        this.buttonCreate = document.getElementById("btn_create");
+        this.title = document.getElementById("input_title");
+        this.content = document.getElementById("input_content");
 
-var recados = [];
-
-function imprimeRecados() {
-    this.mural.innerHTML = '';
-    recados.forEach((e, index, array) => {
-        this.mural.innerHTML += `<div class="recado card"> <div class="card-body"> <h5 class="card-title">${e.titulo}</h5> <p class="card-text">${e.mensagem}</p> <button id="delete" class="btn btn-danger" onclick="removerRecado(${index})">Remover</button></div> </div>`
-    });   
-
-}
-
-window.registrarRecado = function() {
-    var titulo = document.getElementById('tituloMsg').value;
-    var mensagem = document.getElementById('mensagem').value;
-
-    if (!titulo || !mensagem) {
-        return alert('Os dois campos devem ser preenchidos para o registro do recado!')
+        this.registerEvents();
     }
 
-    var recado = {
-        'titulo': titulo,
-        'mensagem': mensagem
+    registerEvents() {
+        this.buttonCreate.onclick = (event) => this.createCard(event);
     }
 
-    recados.push(recado);
+    createCard(event) {
+        event.preventDefault();
 
-    imprimeRecados();
+        if(this.title.value && this.content.value) {
+            const html = this.cardLayout(this.title.value, this.content.value);
+
+            this.insertHtml(html);
+
+            this.clearForm();
+
+            document.querySelectorAll('.delete-card').forEach(item => {
+                item.onclick = event => this.deleteCard(event);
+            });
+
+        } else {
+            alert("Preencha os campos!");
+        }
+    }
+
+    cardLayout(title, content) {
+        const html = `
+            <div class="col mt-5">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">${title}</h5>
+                    <p class="card-text">${content}</p>
+                    <button type="button" class="btn btn-danger delete-card">Excluir</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        return html;
+    }
+
+    insertHtml(html) {
+        document.getElementById("row_cards").innerHTML += html;
+    }
+
+    clearForm() {
+        this.title.value = "";
+        this.content.value = "";
+    }
+
+    deleteCard = (event) => event.path[3].remove();
+
 }
 
-window.removerRecado = function(e) {
-    recados.splice(e, 1);
-    imprimeRecados();
-}
-
-
-
-
-
-    
-    
-    
-    
-    
-    
+new App();
